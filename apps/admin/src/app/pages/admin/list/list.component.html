@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<flex-row class="list">
+  <flex-col>
+    <article class="list__items">
+      <ng-container *ngIf="( users$ | async ) as users">
+        <ng-container *ngIf="users.length; else empty">
+          <flex-row class="list__items__header">
+            <p>Name</p>
+            <p>E-mail</p>
+            <p>Website</p>
+          </flex-row>
+          <ul class="list__items__body">
+            <ng-container *ngFor="let user of users">
+              <li class="action" @opacity>
+                <flex-row class="flex-y-center">
+                  <p>{{ user.name }}</p>
+                  <p>{{ user.email }}</p>
+                  <p>{{ user.website }}</p>
+                  <flex-row class="actions">
+                    <button (click)="onUserData(user.id)"><img src="/assets/icons/back.svg"></button>
+                  </flex-row>
+                </flex-row>
+              </li>
+            </ng-container>
+          </ul>
+        </ng-container>
+        <ng-template #empty>
+          <h2 class="list__empty">Merchants list is empty</h2>
+        </ng-template>
+      </ng-container>
+    </article>
+  </flex-col>
+</flex-row>

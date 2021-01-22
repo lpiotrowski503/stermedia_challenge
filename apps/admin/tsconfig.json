@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "baseUrl": ".",
+    "paths": {
+      "@libs/*": ["../../libs/*"],
+      "@utils/*": ["src/app/utils/*"],
+      "@core/*": ["src/app/core/*"]
+    }
+  }
+}

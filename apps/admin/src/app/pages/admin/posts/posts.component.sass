@@ -1,0 +1,67 @@
+@import '../../../../assets/styles/colors.sass'
+
+:\host
+  display: flex
+  flex-grow: 1
+
+.posts
+  background-color: $page__background__color
+
+  &__user-data
+    padding: 40px
+    flex-grow: 0
+
+    h3
+      min-width: 200px
+
+    span
+      margin-left: 20px
+
+  &__items
+    display: flex
+    flex-grow: 10
+    flex-direction: column
+
+    &__header
+      position: relative
+      padding: 10px 40px
+      box-shadow: 0 10px 15px -10px $button__shadow__color
+      flex-grow: 0
+
+      p
+        font-size: 20px
+        font-weight: 700
+        margin-right: 60px
+
+      label
+        margin: 0 5px 0 30px
+
+    &__body
+      padding: 10px 40px
+      max-height: calc(100vh - 270px)
+      overflow: auto
+
+      &::-webkit-scrollbar
+        width: 6px
+
+      &::-webkit-scrollbar-thumb
+        background-color: $scrollbar__background__color
+
+      li
+        padding: 20px 0
+        background-color: $listitem__background__color
+        box-shadow: 0 10px 15px 0 $default__shadow__color
+        margin: 20px 0
+        border-radius: 5px
+
+        p
+          padding: 0 40px 20px 40px
+
+        h3
+          padding: 20px 40px 40px 40px
+
+  &__empty
+    margin: 100px
+
+.flex-y-center
+  align-items: center

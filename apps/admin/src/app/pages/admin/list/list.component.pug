@@ -1,0 +1,43 @@
+doctype
+flex-row.list
+  flex-col
+    article.list__items
+      ng-container(
+        *ngIf = '( users$ | async ) as users'
+        )
+        ng-container(
+          *ngIf = 'users.length; else empty'
+          )
+          flex-row.list__items__header
+            p
+              |Name
+            p
+              |E-mail
+            p
+              |Website
+          ul.list__items__body
+            ng-container(
+              *ngFor = 'let user of users'
+              )
+              li.action(
+                @opacity
+                )
+                flex-row.flex-y-center
+                  p
+                    |{{ user.name }}
+                  p
+                    |{{ user.email }}
+                  p
+                    |{{ user.website }}
+                  flex-row.actions
+                    button(
+                      (click)="onUserData(user.id)"
+                      )
+                      img(
+                        src = '/assets/icons/back.svg'
+                        )
+        ng-template(
+          #empty
+          )
+          h2.list__empty
+            |Merchants list is empty

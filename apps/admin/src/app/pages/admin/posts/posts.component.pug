@@ -1,0 +1,78 @@
+doctype
+flex-row.posts
+  flex-col
+    ng-container(
+      *ngIf = '( userData$ | async ) as userData'
+      )
+      flex-col.posts__user-data
+        flex-row
+          h3
+            |Name:
+          span
+            |{{ userData.name }}
+        flex-row
+          h3
+            |Email:
+          span
+            |{{ userData.email }}
+        flex-row
+          h3
+            |Webside:
+          span
+            |{{ userData.website }}
+        flex-row
+          h3
+            |Company:
+          span
+            |{{ userData.company?.name }}
+        flex-row
+          h3
+            |Posts:
+          span
+            |{{ userData.postsCount }}
+    article.posts__items
+      ng-container(
+        *ngIf = '( posts$ | async ) as posts'
+        )
+        flex-row.posts__items__header
+          p
+            |Posts
+          label
+            |Show
+          input(
+            type = 'radio',
+            name = 'showPostsList',
+            value = 'show'
+            [(ngModel)]='{{ radio }}',
+            (change)='onRadio($event)'
+            checked
+            )
+          label
+            |Hide
+          input(
+            type = 'radio',
+            name = 'showPostsList',
+            value = 'hide'
+            [(ngModel)]='{{ !radio }}',
+            (change)='onRadio($event)'
+            )
+        ng-container(
+          *ngIf = 'radio && posts?.length'
+          )
+          ul.posts__items__body
+            ng-container(
+              *ngFor = 'let post of posts'
+              )
+              li.action(
+                @opacity
+                )
+                flex-col.flex-y-center
+                  h3
+                    |{{ post.title }}
+                  p
+                    |{{ post.body }}
+        ng-container(
+          *ngIf = 'posts.length === 0'
+          )
+          h2.posts__empty
+            |Posts list is empty

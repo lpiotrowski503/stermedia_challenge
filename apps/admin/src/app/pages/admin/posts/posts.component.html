@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<flex-row class="posts">
+  <flex-col>
+    <ng-container *ngIf="( userData$ | async ) as userData">
+      <flex-col class="posts__user-data">
+        <flex-row>
+          <h3>Name:</h3><span>{{ userData.name }}</span>
+        </flex-row>
+        <flex-row>
+          <h3>Email:</h3><span>{{ userData.email }}</span>
+        </flex-row>
+        <flex-row>
+          <h3>Webside:</h3><span>{{ userData.website }}</span>
+        </flex-row>
+        <flex-row>
+          <h3>Company:</h3><span>{{ userData.company?.name }}</span>
+        </flex-row>
+        <flex-row>
+          <h3>Posts:</h3><span>{{ userData.postsCount }}</span>
+        </flex-row>
+      </flex-col>
+    </ng-container>
+    <article class="posts__items">
+      <ng-container *ngIf="( posts$ | async ) as posts">
+        <flex-row class="posts__items__header">
+          <p>Posts</p>
+          <label>Show</label>
+          <input type="radio" name="showPostsList" value="{{ radio }}" (change)="onRadio($event)" checked>
+          <label>Hide</label>
+          <input type="radio" name="showPostsList" value="{{ !radio }}" (change)="onRadio($event)">
+        </flex-row>
+        <ng-container *ngIf="radio &amp;&amp; posts?.length">
+          <ul class="posts__items__body">
+            <ng-container *ngFor="let post of posts">
+              <li class="action" @opacity>
+                <flex-col class="flex-y-center">
+                  <h3>{{ post.title }}</h3>
+                  <p>{{ post.body }}</p>
+                </flex-col>
+              </li>
+            </ng-container>
+          </ul>
+        </ng-container>
+        <ng-container *ngIf="posts.length === 0">
+          <h2 class="posts__empty">Posts list is empty</h2>
+        </ng-container>
+      </ng-container>
+    </article>
+  </flex-col>
+</flex-row>
